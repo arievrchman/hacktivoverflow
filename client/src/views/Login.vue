@@ -36,12 +36,12 @@
 
 <script>
 export default {
-  name: "login",
+  name: 'login',
   data() {
     return {
       email: '',
-      password: ''
-    }
+      password: '',
+    };
   },
   methods: {
     login() {
@@ -50,21 +50,21 @@ export default {
         url: '/users/login',
         data: {
           email: this.email,
-          password: this.password
-        }
+          password: this.password,
+        },
       })
-      .then(response => {
-        this.email = '';
-        this.password = '';
-        this.$router.push('/');
-        localStorage.setItem('token', response.data.token)
-        this.$store.dispatch('checkUser');
-        console.log(response.data.message);
-      })
-      .catch(error => {
-        
-      });
-    }
+        .then((response) => {
+          this.email = '';
+          this.password = '';
+          this.$router.replace('/');
+          localStorage.setItem('token', response.data.token);
+          this.$store.dispatch('checkUser');
+          console.log(response.data.message);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   },
 };
 </script>

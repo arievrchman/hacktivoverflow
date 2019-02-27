@@ -13,14 +13,14 @@
 </template>
 
 <script>
-import Navbar from "@/components/Navbar.vue";
-import Sidebar from "@/components/Sidebar.vue";
+import Navbar from '@/components/Navbar.vue';
+import Sidebar from '@/components/Sidebar.vue';
 
 export default {
-  name: "app",
+  name: 'app',
   components: {
     Navbar,
-    Sidebar
+    Sidebar,
   },
   mounted() {
     if (localStorage.getItem('token')) {
@@ -29,7 +29,7 @@ export default {
   },
   computed: {
     login() {
-      return this.$store.state.isLogin
+      return this.$store.state.isLogin;
     },
   },
 };

@@ -3,12 +3,16 @@ const { postAnswer, findAllAnswer, findOneAnswer, updateAnswer, deleteAnswer, up
 const { Auth } = require('../../middlewares/auth');
 
 routes.get('/', findAllAnswer);
-routes.get('/:questionId', findQuestionOfAnswer);
-// routes.get('/:id', findOneAnswer);
+routes.get('/:id', findOneAnswer);
+routes.get('/p/:questionId', findQuestionOfAnswer);
 
 
 // Auth user only
 routes.use(Auth);
 routes.post('/:questionId', postAnswer);
+routes.put('/:id', updateAnswer);
+routes.delete('/:id', deleteAnswer);
+routes.post('/:id/upvotes', upVoteAnswer);
+routes.post('/:id/downvotes', downVoteAnswer);
 
 module.exports = routes;

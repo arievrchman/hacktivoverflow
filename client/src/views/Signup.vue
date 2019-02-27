@@ -53,33 +53,35 @@
 
 <script>
 export default {
-  name: "signup",
+  name: 'signup',
   data() {
     return {
-      name: "",
-      email: "",
-      password: ""
+      name: '',
+      email: '',
+      password: '',
     };
   },
   methods: {
     signup() {
       this.$axios({
-        method: "POST",
-        url: "/users/signup",
+        method: 'POST',
+        url: '/users/signup',
         data: {
           name: this.name,
           email: this.email,
-          password: this.password
-        }
+          password: this.password,
+        },
       })
-        .then(response => {
+        .then((response) => {
           this.name = '';
           this.email = '';
           this.password = '';
         })
-        .catch(error => {});
-    }
-  }
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+  },
 };
 </script>
 

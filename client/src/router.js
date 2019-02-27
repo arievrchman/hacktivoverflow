@@ -22,12 +22,17 @@ export default new Router({
     {
       path: '/users/signup',
       name: 'signup',
-      component: () => import ('@/views/Signup.vue'),
+      component: () => import('@/views/Signup.vue'),
     },
     {
       path: '/questions/:id',
       name: 'questions',
-      component: () => import ('@/views/Question.vue'),
-    }
+      component: () => import('@/views/Question.vue'),
+    },
+    {
+      path: '/posts/:id/edit',
+      name: 'posts',
+      component: () => import('@/views/Posts.vue'),
+    },
   ],
 });

@@ -24,9 +24,6 @@
             <router-link :to="{ name: 'questions', params: {id: question._id }}">
               <h6 href>{{question.title}}</h6>
             </router-link>
-            <p class="card-text">
-              <span>{{ question.description.slice(0, 150) }}...</span>
-            </p>
           </div>
         </div>
       </div>
@@ -37,34 +34,25 @@
 
 <script>
 export default {
-  name: "home",
+  name: 'home',
   data() {
     return {
-      questions: [],
-      totalVotes: 0,
-      totalAnswer: 0
+      totalAnswer: 0,
     };
   },
   mounted() {
-    this.$axios({
-      method: "GET",
-      url: "/questions"
-    })
-      .then(({ data }) => {
-        this.questions = data.data;
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    this.$store.dispatch('getAllQuestions');
   },
   methods: {
     countVotes(data) {
       return data.upvotes.length - data.downvotes.length;
     },
-    Question(data) {
-      this.$emit('getQuestion', data);
-    }
-  }
+  },
+  computed: {
+    questions() {
+      return this.$store.state.listQuestions;
+    },
+  },
 };
 </script>
 

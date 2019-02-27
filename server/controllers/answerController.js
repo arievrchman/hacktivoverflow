@@ -89,27 +89,27 @@ module.exports = {
   upVoteAnswer(req, res) {
     Answer
       .findOne({
-        id: req.params._id
+        _id: req.params.id
       })
       .then(data => {
         let isTrue = data.upvotes.filter(userId => {
           return String(userId) === String(req.auth_user._id);
         });
 
-        if (!isTrue || !data.upvotes.length) {
+        if (!isTrue.length || !data.upvotes.length) {
           return Answer
-            .findOneAndUpdate({ id: req.params._id }, {
+            .findOneAndUpdate({ _id: req.params.id }, {
               $push: { upvotes: req.auth_user._id }
             }, { new: true })
         } else {
           return Answer
-            .findOneAndUpdate({ id: req.params._id }, {
+            .findOneAndUpdate({ _id: req.params.id }, {
               $pull: { upvotes: req.auth_user._id }
             }, { new: true })
         }
       })
       .then(result => {
-        res.send(result);
+        res.status(200).json(result);
       })
       .catch(error => {
         res.status(500).json({
@@ -121,27 +121,27 @@ module.exports = {
   downVoteAnswer(req, res) {
     Answer
       .findOne({
-        id: req.params._id
+        _id: req.params.id
       })
       .then(data => {
         let isTrue = data.downvotes.filter(userId => {
           return String(userId) === String(req.auth_user._id);
         });
 
-        if (!isTrue || !data.downvotes.length) {
+        if (!isTrue.length || !data.downvotes.length) {
           return Answer
-            .findOneAndUpdate({ id: req.params._id }, {
+            .findOneAndUpdate({ _id: req.params.id }, {
               $push: { downvotes: req.auth_user._id }
             }, { new: true })
         } else {
           return Answer
-            .findOneAndUpdate({ id: req.params._id }, {
+            .findOneAndUpdate({ _id: req.params.id }, {
               $pull: { downvotes: req.auth_user._id }
             }, { new: true })
         }
       })
       .then(result => {
-        res.send(result);
+        res.status(200).json(result);
       })
       .catch(error => {
         res.status(500).json({
@@ -150,7 +150,6 @@ module.exports = {
         });
       });
   },
-
   findQuestionOfAnswer(req, res) {
     Answer
     .find({
@@ -160,7 +159,10 @@ module.exports = {
       res.status(200).json(response);
     })
     .catch(error => {
-      
+      res.status(500).json({
+        error,
+        message: 'Internal server error'
+      })
     });
   }
 };

@@ -19,7 +19,8 @@ const questionSchema = new Schema({
   },
   updated_at: {
     type: Date,
-  }
+  },
+  answerCount: Number,
 });
 
 

@@ -53,6 +53,7 @@ module.exports = {
       });
   },
   updateQuestion(req, res) {
+    // console.log(req.params.id);
     Question
       .findByIdAndUpdate(req.params.id, {
         title: req.body.title,
@@ -153,7 +154,7 @@ module.exports = {
 
       })
       .then(result => {
-        res.send(result);
+        res.status(200).json(result);
       })
       .catch(error => {
         res.status(500).json({
@@ -162,4 +163,19 @@ module.exports = {
         });
       });
   },
+  // findTheAnswers(req, res) {
+  //   Answer
+  //   .find({
+  //     questionId: req.params.questionId,
+  //   })
+  //   .then(response => {
+  //     res.status(200).json(response);
+  //   })
+  //   .catch(error => {
+  //     res.status(500).json({
+  //       error,
+  //       message: 'Internal server error'
+  //     })
+  //   });
+  // }
 };

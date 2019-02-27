@@ -16,7 +16,7 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-    
+
     <input
       class="form-control ml-5"
       type="search"
@@ -51,13 +51,14 @@
 
 <script>
 export default {
-  name: "navbar",
-  props: ["isLogin"],
+  name: 'navbar',
+  props: ['isLogin'],
   methods: {
     signout() {
       this.$store.commit('userStatus', false);
+      this.$store.commit('whoami', '');
       localStorage.removeItem('token');
-    }
+    },
   },
 };
 </script>

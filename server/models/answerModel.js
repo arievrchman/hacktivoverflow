@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const questionModel = require('../models/questionModel');
 
 const answerSchema = new Schema({
   owner: { type: Schema.Types.ObjectId, ref: 'User' },
@@ -18,6 +19,10 @@ const answerSchema = new Schema({
     type: Date,
   }
 });
+
+
+// Hooks ketika answer baru dimasukkan
+// increment answerCount di question tersebut
 
 const Answer = mongoose.model('Answer', answerSchema);
 module.exports = Answer;
