@@ -1,11 +1,13 @@
 const User = require('../models/userModel');
 const { decrypt } = require('../helpers/encrypt');
 const jwt = require('jsonwebtoken');
+const kue = require('kue');
+const queue = kue.createQueue();
 
 module.exports = {
 
   register(req, res) {
-    console.log(req.body);
+    // console.log(req.body);
     User
       .create({
         name: req.body.name,
@@ -13,6 +15,21 @@ module.exports = {
         password: req.body.password
       })
       .then(user => {
+        let emailJob = queue.create('email', {
+          title: 'Welcome to Hacktiv Overflow',
+          email: user.email,
+          template: `
+          <h1> Welcome ${user.name}, Thanks for Register to our website</h1><br>
+          `});
+
+          emailJob.save(err => {
+            if (err) {
+              console.log(err);
+            } else {
+              console.log('sendong email');
+            }
+          })
+
         res.status(200).json({
           user,
           message: 'Successfully create account'

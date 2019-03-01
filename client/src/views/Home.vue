@@ -36,25 +36,25 @@
 
 <script>
 export default {
-  name: "home",
+  name: 'home',
   data() {
     return {
-      totalAnswer: 0
+      totalAnswer: 0,
     };
   },
   mounted() {
-    this.$store.dispatch("getAllQuestions");
+    this.$store.dispatch('getAllQuestions');
   },
   methods: {
     countVotes(data) {
       return data.upvotes.length - data.downvotes.length;
-    }
+    },
   },
   computed: {
     questions() {
       return this.$store.state.listQuestions;
-    }
-  }
+    },
+  },
 };
 </script>
 

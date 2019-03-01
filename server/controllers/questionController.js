@@ -106,7 +106,8 @@ module.exports = {
         if (!isTrue.length || !data.upvotes.length) {
           return Question
             .findOneAndUpdate({ _id: req.params.id }, {
-              $push: { upvotes: req.auth_user._id }
+              $push: { upvotes: req.auth_user._id },
+              $pull: { downvotes: req.auth_user._id }
             }, { new: true })
         } else {
           return Question
@@ -148,12 +149,13 @@ module.exports = {
 
           return Question
             .findOneAndUpdate({ _id: req.params.id }, {
-              $push: { downvotes: req.auth_user._id }
+              $push: { downvotes: req.auth_user._id },
+              $pull: { upvotes: req.auth_user._id }
             }, { new: true })
         } else {
           return Question
             .findOneAndUpdate({ _id: req.params.id }, {
-              $pull: { downvotes: req.auth_user._id }
+              $pull: { downvotes: req.auth_user._id },
             }, { new: true })
         }
 

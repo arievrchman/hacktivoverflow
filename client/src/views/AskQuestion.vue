@@ -1,5 +1,5 @@
 <template>
-  
+
       <div class="ask--question w-75">
         <h3 class="mb-5">Ask a Question</h3>
         <div class="d-flex flex-column">
@@ -12,38 +12,38 @@
           </div>
         </div>
       </div>
-    
+
 </template>
 
 <script>
 export default {
-  name: "ask",
+  name: 'ask',
   data() {
     return {
-      title: "",
-      description: ""
+      title: '',
+      description: '',
     };
   },
   methods: {
     askQuestion() {
       this.$axios({
-        method: "POST",
-        url: "/questions",
+        method: 'POST',
+        url: '/questions',
         data: {
           title: this.title,
-          description: this.description
+          description: this.description,
         },
-        headers: { token: localStorage.getItem("token") }
+        headers: { token: localStorage.getItem('token') },
       })
-        .then(response => {
+        .then((response) => {
           // console.log(response.data.message);
           this.$alertify.success(response.data.message);
-          this.title = "";
-          this.description = "";
+          this.title = '';
+          this.description = '';
         })
-        .catch(error => {});
-    }
-  }
+        .catch((error) => {});
+    },
+  },
 };
 </script>
 
