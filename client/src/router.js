@@ -25,6 +25,11 @@ export default new Router({
       component: () => import('@/views/Signup.vue'),
     },
     {
+      path: '/questions/ask',
+      name: 'ask',
+      component: () => import('@/views/AskQuestion.vue'),
+    },
+    {
       path: '/questions/:id',
       name: 'questions',
       component: () => import('@/views/Question.vue'),

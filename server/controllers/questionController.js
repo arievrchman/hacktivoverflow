@@ -117,7 +117,7 @@ module.exports = {
 
       })
       .then(result => {
-        // console.log(result);
+        console.log(result);
         res.status(200).json(result);
       })
       .catch(error => {
@@ -138,9 +138,14 @@ module.exports = {
           // console.log(req.auth_user._id);
           return String(userId) === String(req.auth_user._id)
         });
-        console.log(isTrue);
 
         if (!isTrue.length || !data.downvotes.length) {
+
+          const idx = data.upvotes.indexOf(req.auth_user._id);
+          data.upvotes.splice(0, idx);
+
+          // console.log(data);
+
           return Question
             .findOneAndUpdate({ _id: req.params.id }, {
               $push: { downvotes: req.auth_user._id }
@@ -154,6 +159,7 @@ module.exports = {
 
       })
       .then(result => {
+        console.log(result);
         res.status(200).json(result);
       })
       .catch(error => {

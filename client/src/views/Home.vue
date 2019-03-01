@@ -3,9 +3,11 @@
     <div class="container">
       <div class="title--home border-bottom">
         <h3>Top Questions</h3>
-        <button class="btn btn-primary btn-text my-3">
-          <span>Ask Question</span>
-        </button>
+        <router-link to="/questions/ask">
+          <button class="btn btn-primary btn-text my-3">
+            <span>Ask Question</span>
+          </button>
+        </router-link>
       </div>
 
       <div v-for="(question, index) in questions" :key="index" class="listQuestion w-100 card mt-3">
@@ -34,25 +36,25 @@
 
 <script>
 export default {
-  name: 'home',
+  name: "home",
   data() {
     return {
-      totalAnswer: 0,
+      totalAnswer: 0
     };
   },
   mounted() {
-    this.$store.dispatch('getAllQuestions');
+    this.$store.dispatch("getAllQuestions");
   },
   methods: {
     countVotes(data) {
       return data.upvotes.length - data.downvotes.length;
-    },
+    }
   },
   computed: {
     questions() {
       return this.$store.state.listQuestions;
-    },
-  },
+    }
+  }
 };
 </script>
 
